@@ -1,6 +1,6 @@
 ## keyplay
 ### Function
-keyplay: to play a rhythm by keyboard input, when you code or typing.
+keyplay: to play rhythm by keyboard input, when you code or typing.
 
 该程序启动后会监控用户键盘事件，当用户在写代码或者打字的时候会根据键盘输入的字符来生成旋律并播放，以达到编写代码或者是边打字边听音乐的效果。
 
