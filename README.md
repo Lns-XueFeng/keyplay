@@ -6,7 +6,7 @@ keyplay: to play rhythm by keyboard input, when you code or typing.
 
 - 监控用户键盘事件并生成音乐旋律 -已实现
 - 基于musicpy提取midi歌曲之中的主旋律 -已实现
-- 将你的代码生成为音乐旋律 -待实现
+- 将你的代码生成为音乐旋律 -已实现
 - 可切换为终端字符显示钢琴进行演奏 -待实现 
 
 ### Usage
@@ -34,4 +34,23 @@ pip install -r requirements.txt
 python run.py
 # 通过模块包来运行
 python -m keyplay
+```
+
+#### 4.其他功能
+```python
+# 从音乐中分离出主旋律
+from keyplay import split_as_melody
+split_as_melody("example.mid")
+
+# 从音乐中分理出和弦
+from keyplay import split_as_chord
+split_as_chord("example.mid")
+
+# 将代码转换为音乐旋律
+from keyplay import convert
+convert("example.py")
+
+# 播放midi音乐文件
+from keyplay import listen_midi
+listen_midi("example.mid")
 ```
