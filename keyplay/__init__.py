@@ -1,4 +1,5 @@
 from keyplay.bind import run
+from keyplay.cplay import split_as_melody, split_as_chord, convert, listen_midi
 
 
 """
@@ -7,4 +8,10 @@ author: Lns-XueFeng
 function: to play a rhythm when you code or typing and etc
 """
 
-__all__ = ["run"]
+__all__ = [
+    "run", 
+    "split_as_melody", 
+    "split_as_chord", 
+    "convert", 
+    "listen_midi"
+]
