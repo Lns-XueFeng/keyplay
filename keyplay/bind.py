@@ -1,4 +1,4 @@
-from threading import Thread
+from threading import Thread, Lock
 
 from pynput import keyboard
 from pynput.keyboard import Key
@@ -39,20 +39,37 @@ class NoteChord:
 
     def clear(self):
         self.note_chord.clear()
+
+
+class PlayQueue:
+    def __init__(self):
+        self.queue = []
+
+    def get(self, key):
+        self.queue.append(key)
+
+    def put(self):
+        if self.is_empty():
+            return
+        return self.queue.pop(0)
+
+    def is_empty(self):
+        return len(self.queue) == 0
     
 
+lock = Lock()
 key_stack = KeyStack()
-nc = NoteChord()
+play_queue = PlayQueue()
 
 
 def rhythm_play():
+    nc = NoteChord()
     while not key_stack.is_empty():
         key_release = key_stack.pop()
         nc.append(key_release)
 
-    thread = Thread(target=play_chord, args=(nc.note_chord,))
+    thread = Thread(target=play_chord, args=(nc.note_chord,lock,))
     thread.start()
-    nc.clear()
 
 
 def on_press(key):
@@ -63,15 +80,15 @@ def on_press(key):
 
 
 def on_release(key):
-    if key == ".":
+    if key == "." or key == ";":
         rhythm_play()
     elif key == Key.enter:
         rhythm_play()  
-    elif key == ";":
-        rhythm_play()
     elif key == Key.esc:
         return False
-    
+    else:
+        print("record a key to note")
+
 
 def show_in_terminal():
     print("Welecome to the keyplay:")
