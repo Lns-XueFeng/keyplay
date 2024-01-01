@@ -1,10 +1,14 @@
-# read midi file and convert it into rhythm
-# read code file and convert it into a rhythm
 import os
 
 from musicpy import read, play, write, chord
 
-from keyplay.map import key_all_note
+from .map import key_all_note
+
+
+"""convert函数:
+目前仅是一个实验性质的功能，仅是遍历代码文件中的字符转换得到音符
+随着研究乐理，后续会丰富逻辑，尽量实现有节奏、韵律、好听的音乐
+"""
 
 
 midi_dir = "./midi/"
@@ -88,7 +92,8 @@ def listen_midi(filename):
     play(read(filename), wait=True, save_as_file=False)
 
 
-split_as_melody("./midi/torikago.mid")
-split_as_chord("./midi/torikago.mid")
-convert("bind.py")
-# listen_midi("bind.mid")
+if __name__ == "__mian__":
+    split_as_melody("./midi/torikago.mid")
+    split_as_chord("./midi/torikago.mid")
+    convert("bind.py")
+    listen_midi("bind.mid")
