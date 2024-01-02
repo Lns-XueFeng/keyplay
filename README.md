@@ -4,10 +4,12 @@ keyplay: to play rhythm by keyboard input, when you code or typing.
 
 该程序启动后会监控用户键盘事件，当用户在写代码或者打字的时候会根据键盘输入的字符来生成旋律并播放，以达到编写代码或者是边打字边听音乐的效果。
 
-- 监控用户键盘事件并生成音乐旋律 -已实现
+- 监控用户键盘事件达到随敲随听的效果 -已实现
+- 可切换为终端25键字符钢琴进行演奏 -已实现
 - 基于musicpy提取midi歌曲之中的主旋律 -已实现
+- 基于musicpy提取midi歌曲之中的和弦 -已实现
 - 将你的代码生成为音乐旋律 -已实现
-- 可切换为终端字符显示钢琴进行演奏 -待实现 
+- 提供一个函数播放midi音乐文件 - 已实现
 
 ### Usage
 #### 1.克隆项目
@@ -30,27 +32,16 @@ pip install -r requirements.txt
 
 #### 3.运行程序
 ```bash
-# 通过外部脚本运行
-python run.py
-# 通过模块包来运行
-python -m keyplay
+cd keyplay
+python easy_to_run.py
 ```
 
-#### 4.其他功能
-```python
-# 从音乐中分离出主旋律
-from keyplay import split_as_melody
-split_as_melody("example.mid")
-
-# 从音乐中分理出和弦
-from keyplay import split_as_chord
-split_as_chord("example.mid")
-
-# 将代码转换为音乐旋律
-from keyplay import convert
-convert("example.py")
-
-# 播放midi音乐文件
-from keyplay import listen_midi
-listen_midi("example.mid")
-```
+#### 4.程序截图
+主程序界面：
+<img src="./keyplay/screenshot/keyplay.png" alt="keyplay" title="keyplay">
+程序模式一：
+<img src="./keyplay/screenshot/keyplay_mode1.png" alt="keyplay_mode1" title="keyplay_mode1">
+程序模式二：
+<img src="./keyplay/screenshot/keyplay_mode2.png" alt="keyplay_mode2" title="keyplay_mode2">
+程序模式三：
+<img src="./keyplay/screenshot/keyplay_mode3.png" alt="keyplay_mode3" title="keyplay_mode3">
