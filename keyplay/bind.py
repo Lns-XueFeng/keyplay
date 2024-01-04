@@ -5,6 +5,7 @@ from pynput.keyboard import Key
 
 from keyplay.map import key_all_note as key_note
 from keyplay.play import play_chord
+from keyplay.ascii import ascii_keyboard
 
 
 """bind.py
@@ -87,22 +88,24 @@ def on_press(key):
 
 
 def on_release(key):
-    if key == "." or key == ";":
-        rhythm_play()
-    elif key == Key.enter:
-        rhythm_play()  
-    elif key == Key.esc:
-        return False
+    try:
+        if key.char == ".":
+            rhythm_play()
+        elif key.char == ";":
+            rhythm_play()
+    except AttributeError:
+        if key == Key.enter:
+            rhythm_play()
+        elif key == Key.esc:
+            return False
 
 
 def show_key_to_note():
     print("\033c", end="")
-    # print("以下是所有键盘的键对应的音符:")
-    # for k, v in key_note.items():
-    #     if v != "":
-    #         print(f"key:{k} => note:{v}")
-    print("该程序启动后, 将该程序挂于后台, 便可与随心所欲的去敲代码或打字, 享受边敲边听的乐趣")
-    print("按下esc键可以退出子程序")
+    print("以下是所有键盘的键对应的音符:")
+    for k, v in key_note.items():
+        if v != "":
+            print(f"key:{k} => note:{v}")
 
 
 def bind():
@@ -113,5 +116,8 @@ def bind():
 
 
 def run_keymonitor():
-    show_key_to_note()
+    print("\033c", end="")
+    print(ascii_keyboard.strip("\n"))
+    print("程序会在后台监控, 您可随心所欲的去写代码或打字, 享受边敲边听的乐趣")
+    print("按下esc键可以退出子程序")
     bind()
