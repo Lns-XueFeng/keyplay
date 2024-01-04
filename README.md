@@ -38,10 +38,10 @@ python easy_to_run.py
 
 #### 4.程序截图
 主程序界面：
-<img src="./keyplay/screenshot/keyplay.png" alt="keyplay" title="keyplay">
+<img src="./screenshot/keyplay.png" alt="keyplay" title="keyplay">
 程序模式一：
-<img src="./keyplay/screenshot/keyplay_mode1.png" alt="keyplay_mode1" title="keyplay_mode1">
+<img src="./screenshot/keyplay_mode1.png" alt="keyplay_mode1" title="keyplay_mode1">
 程序模式二：
-<img src="./keyplay/screenshot/keyplay_mode2.png" alt="keyplay_mode2" title="keyplay_mode2">
+<img src="./screenshot/keyplay_mode2.png" alt="keyplay_mode2" title="keyplay_mode2">
 程序模式三：
-<img src="./keyplay/screenshot/keyplay_mode3.png" alt="keyplay_mode3" title="keyplay_mode3">
+<img src="./screenshot/keyplay_mode3.png" alt="keyplay_mode3" title="keyplay_mode3">
