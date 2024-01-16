@@ -38,8 +38,8 @@ def  play_chord(notes, lock, interval=0.2, duration=2, bpm=120):
         if notes:
             try:
                 play(chord(notes, interval=interval, duration=duration), 
-                    bpm=bpm, 
-                    instrument=1,
+                    bpm=120, 
+                    instrument=47,
                     wait=True)
             except Exception as e:
                 pass
