@@ -13,7 +13,7 @@ def play_note(note_name):
         try:
             play(N(note_name, duration=1/4), 
                     instrument=1,
-                    wait=True)
+                    wait=False)
         except Exception as e:
             pass
 

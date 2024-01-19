@@ -21,7 +21,7 @@ def run():
             look_functions()
             print("成功退出子程序")
         elif mode == "q":
-            print("成功退出主程序")
+            print("成功退出主程序, 欢迎下次使用！")
             break
         else:
             print("模式数字不在(1, 2, 3)之中, 请再次尝试...")

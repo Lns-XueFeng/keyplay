@@ -1,4 +1,5 @@
 from threading import Thread, Lock
+from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
 from pynput import keyboard
@@ -46,6 +47,7 @@ def gen_marix():
 
 piano_matrix = gen_marix()
 copy_piano_matrix = np.copy(piano_matrix)
+executor = ThreadPoolExecutor(max_workers=10)
 lock = Lock()
 
 
@@ -87,9 +89,10 @@ def piano_keydown(key):
                 show_piano(changed_piano_marix)
             except IndexError:
                 pass
+
             play_note(key_note.get(key))
             break
-    
+  
     for k, v in bkey_dict.items():
         if key == k:
             try:
@@ -97,6 +100,7 @@ def piano_keydown(key):
                 show_piano(changed_piano_marix)
             except IndexError:
                 pass
+
             play_note(key_note.get(key))
             break
 
@@ -110,8 +114,7 @@ def piano_keyup(key):
 def on_press(key):
     try:
         if key.char in wkey_dict or key.char in bkey_dict:
-            thread = Thread(target=piano_keydown, args=(key.char,))
-            thread.start()
+            executor.submit(piano_keydown, key.char)
     except AttributeError:
         pass
 
@@ -119,8 +122,7 @@ def on_press(key):
 def on_release(key):
     try:
         if key.char in wkey_dict or key.char in bkey_dict:
-            thread = Thread(target=piano_keyup, args=(key.char,))
-            thread.start()
+            executor.submit(piano_keyup, key.char)
     except AttributeError:       
         if key == Key.esc:
             return False

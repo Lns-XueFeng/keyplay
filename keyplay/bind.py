@@ -53,13 +53,12 @@ class PlayQueue:
     def __init__(self):
         self.queue = []
 
-    def get(self, key):
+    def enter(self, key):
         self.queue.append(key)
 
-    def put(self):
-        if self.is_empty():
-            return
-        return self.queue.pop(0)
+    def out(self):
+        if not self.is_empty():
+            return self.queue.pop(0)
 
     def is_empty(self):
         return len(self.queue) == 0
@@ -68,6 +67,7 @@ class PlayQueue:
 lock = Lock()
 key_stack = KeyStack()
 play_queue = PlayQueue()
+backmusic_active = False
 
 
 def rhythm_play():
@@ -75,9 +75,12 @@ def rhythm_play():
     while not key_stack.is_empty():
         key_release = key_stack.pop()
         nc.append(key_release)
-
-    thread = Thread(target=play_chord, args=(nc.note_chord,lock,))
-    thread.start()
+    
+    play_queue.enter(nc.note_chord)
+    while not play_queue.is_empty():
+        chord = play_queue.out()
+        thread = Thread(target=play_chord, args=(chord,lock,))
+        thread.start()
 
 
 def on_press(key):
@@ -91,12 +94,20 @@ def on_release(key):
     try:
         if key.char == ".":
             rhythm_play()
+        elif key.char == ",":
+            rhythm_play()
         elif key.char == ";":
+            rhythm_play()
+        elif key.char == "'":
             rhythm_play()
     except AttributeError:
         if key == Key.enter:
             rhythm_play()
+        elif key == Key.space:
+            rhythm_play()
         elif key == Key.esc:
+            global backmusic_active
+            backmusic_active = True
             return False
 
 
